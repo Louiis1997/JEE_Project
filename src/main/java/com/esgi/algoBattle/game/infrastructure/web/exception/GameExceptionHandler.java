@@ -1,6 +1,6 @@
 package com.esgi.algoBattle.game.infrastructure.web.exception;
 
-import fr.esgi.devwars.game.domain.exception.IncorrectPlayerNumberException;
+import com.esgi.algoBattle.game.domain.exception.IncorrectPlayerNumberException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
