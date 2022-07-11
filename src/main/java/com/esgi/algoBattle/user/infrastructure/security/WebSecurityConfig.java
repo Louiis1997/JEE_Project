@@ -1,6 +1,5 @@
 package com.esgi.algoBattle.user.infrastructure.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,14 +18,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private CustomUserDetailsService jwtUserDetailsService;
+    private final CustomUserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    private JWTRequestFilter jwtRequestFilter;
+    private final JWTRequestFilter jwtRequestFilter;
+
+    public WebSecurityConfig(JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint, CustomUserDetailsService jwtUserDetailsService, JWTRequestFilter jwtRequestFilter) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtUserDetailsService = jwtUserDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/users", "/api/users/signin","/ws/**")
+                .antMatchers("/api/users", "/api/users/signin", "/ws/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()

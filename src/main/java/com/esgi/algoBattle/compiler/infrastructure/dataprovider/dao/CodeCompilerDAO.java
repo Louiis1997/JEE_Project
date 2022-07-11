@@ -8,8 +8,9 @@ import com.esgi.algoBattle.compiler.domain.dao.CompilerDAO;
 import com.esgi.algoBattle.compiler.domain.exception.CompilationException;
 import com.esgi.algoBattle.compiler.domain.exception.ContainerExecutionException;
 import com.esgi.algoBattle.compiler.domain.exception.DockerBuildException;
-import com.esgi.algoBattle.compiler.domain.model.*;
-import com.esgi.algoBattle.compiler.infrastructure.utils.*;
+import com.esgi.algoBattle.compiler.domain.model.CaseExecutionOutput;
+import com.esgi.algoBattle.compiler.domain.model.ExecutionOutput;
+import com.esgi.algoBattle.compiler.domain.model.Language;
 import com.esgi.algoBattle.compiler.infrastructure.utils.interfaces.RunnableCase;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -19,13 +20,13 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CodeCompilerDAO implements CompilerDAO {
 
     private final RunnableCase codeRunner;
-    private final ExecutionScriptGenerateManager executionScriptGenerateManager;
     private final FindAlgorithmById findAlgorithmById;
     private final FindAllAlgorithmCasesByAlgo findAllAlgorithmCasesByAlgo;
     private final FindAllCaseInputsByCase findAllCaseInputsByCase;
@@ -57,12 +58,14 @@ public class CodeCompilerDAO implements CompilerDAO {
         try {
             caseExecutionOutputs = codeRunner.runAndVerifyCases(algo, sourceCode, language);
         } catch (DockerBuildException | ContainerExecutionException | IOException e) {
+            logger.error(e.getMessage());
             e.printStackTrace();
         } catch (CompilationException e) {
+            logger.error(e.getMessage());
             compilationError = true;
             compilationErrorStack = e.getMessage();
         }
-        var isOverallSuccessful = !compilationError && caseExecutionOutputs.stream().allMatch(CaseExecutionOutput::isSuccessful);
+        var isOverallSuccessful = !compilationError && Objects.requireNonNull(caseExecutionOutputs).stream().allMatch(CaseExecutionOutput::isSuccessful);
 
         return new ExecutionOutput()
                 .setSuccessfullyCompiled(!compilationError)
