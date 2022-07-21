@@ -87,6 +87,4 @@ public class PlayerController {
         List<Player> players = retrievePlayersByGame.execute(gameId);
         return ResponseEntity.ok(usersByGameAdapter.toResponses(players));
     }
-
-
 }
