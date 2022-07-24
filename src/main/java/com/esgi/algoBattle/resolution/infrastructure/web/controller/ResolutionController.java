@@ -45,6 +45,7 @@ public class ResolutionController {
     private final FindAllResolutionsByUser findAllResolutionsByUser;
     private final FindAllResolutionsByGame findAllResolutionsByGame;
     private final FindOneResolution findOneResolution;
+    private final OpponentLosesHealth opponentLosesHealth;
     private final CheckGameStatus checkGameStatus;
     private final StartResolution startResolution;
     private final RetrievePlayersByGame retrievePlayersByGame;
@@ -96,6 +97,10 @@ public class ResolutionController {
         final var errorNumber = linterErrors.stream()
                 .mapToInt(LinterError::getErrorNumber)
                 .sum();
+
+        if (Boolean.TRUE.equals(resolution.isSolved())) {
+            opponentLosesHealth.execute(gameId, userId, errorNumber);
+        }
 
         checkGameStatus.execute(gameId);
 
