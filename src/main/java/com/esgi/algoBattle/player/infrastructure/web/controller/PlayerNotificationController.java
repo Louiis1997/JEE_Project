@@ -11,8 +11,6 @@ public class PlayerNotificationController {
     @MessageMapping("/games/{gameId}")
     @SendTo("/start/games/{gameId}")
     public int launchGameAfterOtherPlayerJoining(@DestinationVariable int gameId) {
-        System.out.println("this user fking id");
-        System.out.println(gameId);
         return gameId;
     }
 
