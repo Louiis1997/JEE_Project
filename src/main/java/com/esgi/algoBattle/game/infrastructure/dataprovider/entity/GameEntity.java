@@ -15,9 +15,9 @@ public class GameEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private LocalDateTime date;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @Column
-    private Boolean over;
+    @Column(name = "is_over")
+    private Boolean isOver;
 }

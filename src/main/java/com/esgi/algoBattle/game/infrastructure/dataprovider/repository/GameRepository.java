@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface GameRepository extends JpaRepository<GameEntity, Long> {
-    List<GameEntity> findByOver(Boolean over);
+    List<GameEntity> findByIsOver(Boolean over);
 }

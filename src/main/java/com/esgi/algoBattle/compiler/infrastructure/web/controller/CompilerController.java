@@ -27,7 +27,6 @@ public class CompilerController {
     public ResponseEntity<ExecutionOutput> compile(@Valid @RequestBody CompilerRequest request) {
         try {
             final var result = compileCode.execute(request.getAlgorithmId(), request.getSourceCode(), request.getLanguage());
-
             final var linterErrors = analyzeCode.execute(request.getSourceCode(), request.getLanguage());
             result.setLinterErrors(linterErrors);
             return ResponseEntity.ok(result);

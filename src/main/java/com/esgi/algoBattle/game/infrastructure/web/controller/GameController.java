@@ -34,7 +34,7 @@ public class GameController {
 
     @PostMapping
     public ResponseEntity<GameResponse> create(@Valid @RequestBody GameCreateRequest request) {
-
+        System.out.println("request: " + request);
         Game game = createGame.execute(request.getDate(), request.getOver());
 
         URI uri = ServletUriComponentsBuilder

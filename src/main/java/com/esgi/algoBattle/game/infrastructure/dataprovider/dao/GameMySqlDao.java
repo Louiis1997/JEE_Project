@@ -42,7 +42,7 @@ public class GameMySqlDao implements GameDAO {
 
     @Override
     public List<Game> findAllUnfinishedGames() {
-        return repository.findByOver(false)
+        return repository.findByIsOver(false)
                 .stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
@@ -51,7 +51,7 @@ public class GameMySqlDao implements GameDAO {
     @Override
     public Game update(Game game) {
         GameEntity gameEntity = repository.getOne(game.getId());
-        gameEntity.setOver(game.getOver());
+        gameEntity.setIsOver(game.getOver());
         return mapper.toDomain(repository.save(gameEntity));
     }
 
