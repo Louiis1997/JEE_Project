@@ -24,4 +24,17 @@ public class Resolution {
     public Boolean isSolved() {
         return Boolean.TRUE.equals(solved);
     }
+
+    @Override
+    public String toString() {
+        return "Resolution{" +
+                "user=" + user.getId() +
+                ", algorithm=" + algorithm.getId() +
+                ", game=" + game.getId() +
+                ", resolutionTime=" + resolutionTime +
+                ", solved=" + solved +
+                ", linterErrors=" + linterErrors +
+                ", startedTime=" + startedTime +
+                '}';
+    }
 }
