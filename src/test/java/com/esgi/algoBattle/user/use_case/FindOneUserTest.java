@@ -14,7 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@TestPropertySource("../../../../../../resources/application.properties")
+@TestPropertySource("/application.properties")
 class FindOneUserTest {
 
     @Autowired
