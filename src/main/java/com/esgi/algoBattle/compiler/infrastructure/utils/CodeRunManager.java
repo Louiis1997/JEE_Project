@@ -45,7 +45,7 @@ public class CodeRunManager implements RunnableCase, VerifiableOutput {
 
             String currentCode = sourceCodeExecutables.get(i);
             logger.info("Executing code..");
-            CodexExecuteResponse result = CodexAPIService.post(currentCode, language.toString());
+            CodexExecuteResponse result = new CodexAPIService().post(currentCode, language.toString());
             logger.info("End of execution");
             logger.info("Result from codex :\n" + result);
 

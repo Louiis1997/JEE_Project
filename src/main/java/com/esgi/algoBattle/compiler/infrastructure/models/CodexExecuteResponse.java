@@ -1,12 +1,12 @@
 package com.esgi.algoBattle.compiler.infrastructure.models;
 
 public class CodexExecuteResponse {
-    public final boolean success; // ": true,
-    public final String timestamp; // ": "2022-05-26T19:59:08.014Z",
-    public final String output; // ": "Hello\nWorld\n",
-    public final String error; // ": "  File \"/app/codes/6d775729-045f-4569-8117-ef129a1e612b.py\", line 1\n    print(123)z\n              ^\nSyntaxError: invalid syntax\n",
-    public final String language; // ": "java",
-    public final String version; // ": "11.0.15"
+    public boolean success; // ": true,
+    public String timestamp; // ": "2022-05-26T19:59:08.014Z",
+    public String output; // ": "Hello\nWorld\n",
+    public String error; // ": "  File \"/app/codes/6d775729-045f-4569-8117-ef129a1e612b.py\", line 1\n    print(123)z\n              ^\nSyntaxError: invalid syntax\n",
+    public String language; // ": "java",
+    public String version; // ": "11.0.15"
 
     public CodexExecuteResponse() {
         this.success = false;
