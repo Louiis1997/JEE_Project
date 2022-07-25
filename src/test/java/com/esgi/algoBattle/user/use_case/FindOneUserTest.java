@@ -14,7 +14,6 @@ import org.springframework.test.context.TestPropertySource;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@TestPropertySource("/application.properties")
 class FindOneUserTest {
 
     @Autowired
@@ -28,7 +27,7 @@ class FindOneUserTest {
         User user = new User()
                 .setId(1L)
                 .setName("Louis")
-                .setEmail("Louise.xia@gmail.com")
+                .setEmail("Louis.xia@gmail.com")
                 .setPassword("Louis")
                 .setLevel(0);
         Mockito.when(userDAO.findById(user.getId())).thenReturn(user);
@@ -40,7 +39,7 @@ class FindOneUserTest {
     }
 
     @Test
-    void should_throw_a_not_found_exception() {
+    void should_throw_NotFoundException() {
         Long userId = 0L;
         Mockito.when(userDAO.findById(userId)).thenThrow(new NotFoundException(
                 String.format("User with id '%d' does not exist", 0L)));
