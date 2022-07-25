@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@TestPropertySource("classpath:application.properties")
+@SpringBootTest(classes = SignInTest.class)
 class SignInTest {
 
     @Autowired
