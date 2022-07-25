@@ -18,5 +18,4 @@ public class FindOneUser {
                 String.format("User with id '%d' does not exist", userId));
         return user;
     }
-
 }

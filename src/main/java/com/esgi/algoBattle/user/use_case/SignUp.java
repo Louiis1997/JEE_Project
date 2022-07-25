@@ -23,7 +23,8 @@ public class SignUp {
         User newUser = new User()
                 .setName(name)
                 .setEmail(email)
-                .setPassword(passwordEncoder.encode(password));
+                .setPassword(passwordEncoder.encode(password))
+                .setLevel(0);
 
         return userDAO.registerUser(newUser);
     }

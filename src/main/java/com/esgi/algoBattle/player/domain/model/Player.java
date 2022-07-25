@@ -14,7 +14,6 @@ public class Player {
     private User user;
     private Integer remainingHealthPoints = 100;
     private Boolean won;
-    private Boolean darkMode;
 
     public Boolean hasWon() {
         return Boolean.TRUE.equals(won);
@@ -22,9 +21,5 @@ public class Player {
 
     public static int getMaxHealthPoints() {
         return MAX_HEALTH_POINTS;
-    }
-
-    public void canActivateDarkMode() {
-        darkMode = true;
     }
 }

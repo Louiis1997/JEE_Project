@@ -13,7 +13,8 @@ public class UserAdapter {
         return new UserResponse()
                 .setId(user.getId())
                 .setName(user.getName())
-                .setEmail(user.getEmail());
+                .setEmail(user.getEmail())
+                .setLevel(user.getLevel());
     }
 
     public List<UserResponse> toResponses(List<User> users) {

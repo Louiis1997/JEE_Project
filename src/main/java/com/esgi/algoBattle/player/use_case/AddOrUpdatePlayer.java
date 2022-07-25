@@ -37,6 +37,10 @@ public class AddOrUpdatePlayer {
 
         if (playerAlreadyExists(player)) {
             updatePlayer(player);
+            if(player.hasWon()){
+                int currentLevel = user.getLevel();
+                user.setLevel(currentLevel + 1);
+            }
         } else {
             createPlayer(player);
         }

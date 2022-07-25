@@ -11,13 +11,15 @@ public class UserMapper {
                 .setId(entity.getId())
                 .setName(entity.getName())
                 .setEmail(entity.getEmail())
-                .setPassword(entity.getPassword());
+                .setPassword(entity.getPassword())
+                .setLevel(entity.getLevel());
     }
 
     public UserEntity toEntity(User user) {
         return new UserEntity()
                 .setName(user.getName())
                 .setEmail(user.getEmail())
-                .setPassword(user.getPassword());
+                .setPassword(user.getPassword())
+                .setLevel(user.getLevel());
     }
 }
