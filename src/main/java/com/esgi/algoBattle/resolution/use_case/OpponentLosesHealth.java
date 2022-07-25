@@ -19,10 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OpponentLosesHealth {
 
+    public static final Integer DEFAULT_DAMAGE_AMOUNT = 10;
+
     private final PlayerDAO playerDAO;
     private final GameDAO gameDAO;
-
-    private final Integer DEFAUMT_DAMAGE_AMOUNT = 10;
 
     public void execute(Long gameId, Long userId, Integer errorNumber) {
         final var game = findGame(gameId);
@@ -32,7 +32,7 @@ public class OpponentLosesHealth {
         final var currentPlayer = getCurrentPlayer(players, userId);
 
         final var opponent = getOpponent(players, currentPlayer);
-        attackOpponent(DEFAUMT_DAMAGE_AMOUNT, opponent, errorNumber);
+        attackOpponent(DEFAULT_DAMAGE_AMOUNT, opponent, errorNumber);
     }
 
     private void assertGameIsNotOver(Game game) {
@@ -47,7 +47,7 @@ public class OpponentLosesHealth {
                 .findFirst();
 
         if (opponent.isEmpty()) {
-            throw new NoOpponentSpecifiedException("No opponent to use item");
+            throw new NoOpponentSpecifiedException("No opponent to be attacked");
         }
         return opponent.get();
     }
@@ -66,7 +66,7 @@ public class OpponentLosesHealth {
                 .findFirst();
 
         if (currentPlayer.isEmpty()) {
-            throw new NoCurrentPlayerException("No performer to use item");
+            throw new NoCurrentPlayerException("No performer to attack opponent");
         }
 
         return currentPlayer.get();
@@ -74,7 +74,7 @@ public class OpponentLosesHealth {
 
     private Game findGame(Long gameId) {
         if (gameId == null) {
-            throw new NoGameSpecifiedException("No game specified to use the item");
+            throw new NoGameSpecifiedException("No game specified to attack opponent");
         }
         final var game = gameDAO.findById(gameId);
         if (game == null) {
