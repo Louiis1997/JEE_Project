@@ -1,8 +1,7 @@
-package com.esgi.algoBattle.Game.use_case;
+package com.esgi.algoBattle.game.use_case;
 
 import com.esgi.algoBattle.game.domain.dao.GameDAO;
 import com.esgi.algoBattle.game.domain.model.Game;
-import com.esgi.algoBattle.game.use_case.CheckGameStatus;
 import com.esgi.algoBattle.player.domain.dao.PlayerDAO;
 import com.esgi.algoBattle.player.domain.model.Player;
 import com.esgi.algoBattle.user.domain.model.User;

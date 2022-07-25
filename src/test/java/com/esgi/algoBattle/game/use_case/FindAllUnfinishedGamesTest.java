@@ -1,9 +1,8 @@
-package com.esgi.algoBattle.Game.use_case;
+package com.esgi.algoBattle.game.use_case;
 
 import com.esgi.algoBattle.game.domain.model.Game;
 import com.esgi.algoBattle.game.infrastructure.dataprovider.entity.GameEntity;
 import com.esgi.algoBattle.game.infrastructure.dataprovider.repository.GameRepository;
-import com.esgi.algoBattle.game.use_case.FindAllUnfinishedGames;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
