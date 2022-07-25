@@ -16,6 +16,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Run tests
+      run: mvn test
     - name: Build
       run: mvn -B package --file pom.xml -DskipTests=true
     - name: Upload to EC2
