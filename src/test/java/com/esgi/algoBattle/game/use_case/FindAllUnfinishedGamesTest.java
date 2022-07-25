@@ -6,12 +6,10 @@ import com.esgi.algoBattle.game.infrastructure.dataprovider.repository.GameRepos
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,9 +26,6 @@ public class FindAllUnfinishedGamesTest {
     private FindAllUnfinishedGames findAllUnfinishedGames;
     @MockBean
     private GameRepository gameRepository;
-
-    @Mock
-    private JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     public void initEach() {

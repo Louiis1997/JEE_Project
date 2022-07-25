@@ -2,18 +2,18 @@ package com.esgi.algoBattle.game.use_case;
 
 import com.esgi.algoBattle.game.domain.dao.GameDAO;
 import com.esgi.algoBattle.game.domain.model.Game;
+import com.esgi.algoBattle.game.infrastructure.dataprovider.repository.GameRepository;
 import com.esgi.algoBattle.player.domain.dao.PlayerDAO;
 import com.esgi.algoBattle.player.domain.model.Player;
+import com.esgi.algoBattle.player.infrastructure.dataprovider.repository.PlayerRepository;
 import com.esgi.algoBattle.user.domain.model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,8 +37,10 @@ public class CheckGameStatusTest {
     @MockBean
     private PlayerDAO playerDAO;
 
-    @Mock
-    private JdbcTemplate jdbcTemplate;
+    @MockBean
+    private GameRepository gameRepository;
+    @MockBean
+    private PlayerRepository playerRepository;
 
     @BeforeEach
     public void initEach() {
