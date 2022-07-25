@@ -11,9 +11,9 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class CodexAPIService {
-    public static String url = "https://codex-api.herokuapp.com/";
+    public String url = "https://codex-api.herokuapp.com/";
 
-    public static CodexExecuteResponse post(String code, String language) {
+    public CodexExecuteResponse post(String code, String language) {
         WebClient webClient = WebClient.builder().baseUrl(url).build();
         return webClient.post()
                 .uri(UriBuilder::build)
