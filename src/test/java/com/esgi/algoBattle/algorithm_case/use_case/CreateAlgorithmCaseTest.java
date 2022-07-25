@@ -68,7 +68,7 @@ class CreateAlgorithmCaseTest {
 
 
     @Test
-    void when_algorithm_request_is_valid_then_return_created_algorithm() {
+    void when_algorithm_case_request_is_valid_then_return_created_algorithm_case() {
         Long algorithmId = 1L;
         Mockito.when(algorithmDAO.findById(algorithmId)).thenReturn(algorithm1);
 
