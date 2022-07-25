@@ -63,7 +63,7 @@ public class CheckGameStatusTest {
     }
 
     @Test
-    public void test_check_game_status_when_game_is_over() {
+    public void when_game_is_over_should_not_define_loser_winner_and_close_game() {
         game.setOver(true);
 
         Mockito.when(gameDAO.findById(game.getId())).thenReturn(game);
@@ -72,11 +72,13 @@ public class CheckGameStatusTest {
 
         verify(gameDAO, times(1)).findById(game.getId());
         verify(playerDAO, times(0)).findAllByGame(game.getId());
+        verify(playerDAO, times(0)).update(playerEntity1);
+        verify(playerDAO, times(0)).update(playerEntity2);
         verify(gameDAO, times(0)).update(game);
     }
 
     @Test
-    public void test_check_game_status_when_game_is_not_over_and_loser_not_present_yet() {
+    public void when_game_is_not_over_and_loser_not_present_yet_should_get_game_players() {
         Mockito.when(gameDAO.findById(game.getId())).thenReturn(game);
         Mockito.when(playerDAO.findAllByGame(game.getId())).thenReturn(players);
 
@@ -84,12 +86,13 @@ public class CheckGameStatusTest {
 
         verify(gameDAO, times(1)).findById(game.getId());
         verify(playerDAO, times(1)).findAllByGame(game.getId());
+        verify(playerDAO, times(0)).update(playerEntity1);
+        verify(playerDAO, times(0)).update(playerEntity2);
         verify(gameDAO, times(0)).update(game);
     }
 
-    // If game is not over -> and have a loser -> we pass in the if -> defineLoser called, findWinner called, closeTheGame called
     @Test
-    public void test_check_game_status_when_game_is_not_over_and_loser_present_yet() {
+    public void when_game_is_not_over_and_loser_present_should_end_game_and_define_winner() {
         playerEntity2.setRemainingHealthPoints(0);
 
         Mockito.when(gameDAO.findById(game.getId())).thenReturn(game);
