@@ -15,10 +15,10 @@ public class AnalyzeCodeStrategyFactory {
 
     @Autowired
     public AnalyzeCodeStrategyFactory(Set<AnalyzeCodeStrategy> strategies) {
-        instanciateStrategies(strategies);
+        instantiateStrategies(strategies);
     }
 
-    private void instanciateStrategies(Set<AnalyzeCodeStrategy> strategiesToInstanciate) {
+    private void instantiateStrategies(Set<AnalyzeCodeStrategy> strategiesToInstanciate) {
         strategies = new HashMap<>();
         strategiesToInstanciate.forEach(strategie ->
                 strategies.put(strategie.getStrategyLanguage(), strategie));
