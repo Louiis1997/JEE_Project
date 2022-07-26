@@ -19,4 +19,7 @@ public class JWTResponse implements Serializable {
         this.jwttoken = jwttoken;
     }
 
+    public JWTResponse() {
+        jwttoken = null;
+    }
 }

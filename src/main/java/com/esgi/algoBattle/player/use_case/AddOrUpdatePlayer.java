@@ -4,7 +4,6 @@ import com.esgi.algoBattle.common.domain.exception.NotFoundException;
 import com.esgi.algoBattle.game.domain.dao.GameDAO;
 import com.esgi.algoBattle.game.domain.model.Game;
 import com.esgi.algoBattle.player.domain.dao.PlayerDAO;
-
 import com.esgi.algoBattle.player.domain.exception.GameOverException;
 import com.esgi.algoBattle.player.domain.exception.TooManyPlayersInGameException;
 import com.esgi.algoBattle.player.domain.exception.TooManyPlayersWonException;
@@ -37,7 +36,7 @@ public class AddOrUpdatePlayer {
 
         if (playerAlreadyExists(player)) {
             updatePlayer(player);
-            if(player.hasWon()){
+            if (player.hasWon()) {
                 int currentLevel = user.getLevel();
                 user.setLevel(currentLevel + 1);
             }
