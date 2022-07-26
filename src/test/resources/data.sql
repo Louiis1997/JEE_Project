@@ -73,11 +73,6 @@ create table if not exists user
     level    int          null
     );
 
-INSERT INTO `game` (`id`, `created_at`, `is_over`)
-VALUES (1, '2020-12-12 12:12:00', false),
-       (2, '2020-12-12 12:13:00', true),
-       (3, '2020-12-12 12:14:00', false);
-
 INSERT INTO `algorithm` (`id`, `complexity`, `cpp_initial_code`, `description`, `func_name`, `java_initial_code`,
                          `memory_limit`, `python_initial_code`, `short_description`, `time_limit`, `time_to_solve`,
                          `wording`)
@@ -183,9 +178,3 @@ VALUES (1, 1, '[5, 2, 2]'),
        (33, 30, 'snobons');
 
 
-INSERT INTO `player` (`game_id`, `user_id`, `remaining_health_points`, `won`)
-VALUES (1, 1, 100, false),
-       (1, 2, 100, false),
-       (2, 1, -28, false),
-       (2, 2, 50, true),
-       (3, 2, 100, false);
