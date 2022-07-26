@@ -22,6 +22,9 @@ public class CaseExecutionOutput {
         this.isSuccessful = isSuccessful;
     }
 
+    public CaseExecutionOutput() {
+    }
+
     private Status statusResponse(int status) {
         return switch (status) {
             case 0 -> Status.Success;
