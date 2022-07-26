@@ -9,10 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+
 @SpringBootTest
+@AutoConfigureTestDatabase
 class CreateAlgorithmTest {
 
     private Algorithm algorithm1;
@@ -31,32 +34,32 @@ class CreateAlgorithmTest {
 
     @BeforeEach
     public void initEach() {
-       algorithm1 =new Algorithm()
-               .setId(1L)
-               .setWording("Complétez la fonction sum afin de renvoyer la somme des nombres passés en paramètre")
-               .setFuncName("sum")
-               .setPythonInitialCode("def sum(numbers):")
-               .setJavaInitialCode("public int sum(List<int> numbers) {}")
-               .setCppInitialCode("int sum(int *numbers) {}")
-               .setDescription("Addition de nombres")
-               .setShortDescription("Addition de nombres")
-               .setTimeToSolve(180)
-               .setTimeLimit(180)
-               .setComplexity(1)
-               .setMemoryLimit(400);
+        algorithm1 = new Algorithm()
+                .setId(1L)
+                .setWording("Complétez la fonction sum afin de renvoyer la somme des nombres passés en paramètre")
+                .setFuncName("sum")
+                .setPythonInitialCode("def sum(numbers):")
+                .setJavaInitialCode("public int sum(List<int> numbers) {}")
+                .setCppInitialCode("int sum(int *numbers) {}")
+                .setDescription("Addition de nombres")
+                .setShortDescription("Addition de nombres")
+                .setTimeToSolve(180)
+                .setTimeLimit(180)
+                .setComplexity(1)
+                .setMemoryLimit(400);
 
-       goodRequest = new AlgorithmRequest()
-               .setComplexity(1)
-               .setShortDescription("Soustraction de nombres")
-               .setDescription("Soustraction de nombres")
-               .setCppInitialCode("int substract(int *numbers) {}")
-               .setJavaInitialCode("public int substract(List<int> numbers) {}")
-               .setPythonInitialCode("def substract(numbers):")
-               .setFuncName("substract")
-               .setTimeLimit(500)
-               .setTimeToSolve(34)
-               .setMemoryLimit(400)
-               .setWording("Complétez la fonction substract afin de renvoyer la soustraction des nombres passés en paramètre");
+        goodRequest = new AlgorithmRequest()
+                .setComplexity(1)
+                .setShortDescription("Soustraction de nombres")
+                .setDescription("Soustraction de nombres")
+                .setCppInitialCode("int substract(int *numbers) {}")
+                .setJavaInitialCode("public int substract(List<int> numbers) {}")
+                .setPythonInitialCode("def substract(numbers):")
+                .setFuncName("substract")
+                .setTimeLimit(500)
+                .setTimeToSolve(34)
+                .setMemoryLimit(400)
+                .setWording("Complétez la fonction substract afin de renvoyer la soustraction des nombres passés en paramètre");
 
         badRequest = new AlgorithmRequest()
                 .setComplexity(1)
@@ -111,11 +114,11 @@ class CreateAlgorithmTest {
                 .setMemoryLimit(badRequest.getMemoryLimit());
         Mockito.when(algorithmDAO.create(algorithm)).thenThrow(NullPointerException.class);
 
-        Assertions.assertThrows( NullPointerException.class, () -> createAlgorithm.execute(badRequest));
+        Assertions.assertThrows(NullPointerException.class, () -> createAlgorithm.execute(badRequest));
     }
 
     @Test
     void when_algorithm_request_is_null_then_throw_null_pointer_exception() {
-        Assertions.assertThrows( NullPointerException.class, () -> createAlgorithm.execute(null));
+        Assertions.assertThrows(NullPointerException.class, () -> createAlgorithm.execute(null));
     }
 }

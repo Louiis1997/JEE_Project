@@ -7,10 +7,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
+@AutoConfigureTestDatabase
+@AutoConfigureMockMvc
 class SignInTest {
 
     @Autowired
@@ -23,8 +29,9 @@ class SignInTest {
     void should_signin() {
         String username = "Louis";
         String password = "Louis";
-        CustomUserDetails customUserDetails = new CustomUserDetails(1L,"Louis","Louis.xia@gmail.com","$2a$10$HfBY9FSrWp95YyCn8GTVRudgoNWHek5itdSVDt9cyc5e7qiB.8rzW", 0, null);
-        Mockito.when(userDetailsService.loadUserByUsername(username)).thenReturn(customUserDetails);
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "Louis", "Louis.xia@gmail.com", "$2a$10$HfBY9FSrWp95YyCn8GTVRudgoNWHek5itdSVDt9cyc5e7qiB.8rzW", 0, null);
+        when(userDetailsService.loadUserByUsername(username)).thenReturn(customUserDetails);
+
         CustomUserDetails foundCustomUserDetails = signIn.execute(username, password);
         Assertions.assertEquals(customUserDetails, foundCustomUserDetails);
     }
@@ -33,7 +40,7 @@ class SignInTest {
     void shoud_throw_InvalidCredentialsException() {
         String username = "Louis";
         String password = "Azertyuiop";
-        CustomUserDetails customUserDetails = new CustomUserDetails(1L,"Louis","Louis.xia@gmail.com","$2a$10$HfBY9FSrWp95YyCn8GTVRudgoNWHek5itdSVDt9cyc5e7qiB.8rzW", 0, null);
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "Louis", "Louis.xia@gmail.com", "$2a$10$HfBY9FSrWp95YyCn8GTVRudgoNWHek5itdSVDt9cyc5e7qiB.8rzW", 0, null);
         Mockito.when(userDetailsService.loadUserByUsername(username)).thenReturn(customUserDetails);
         Assertions.assertThrows(InvalidCredentialsException.class, () -> signIn.execute(username, password));
     }

@@ -1,7 +1,82 @@
-INSERT INTO `game` (`id`, `date`, `over`)
-VALUES (1, '2020-12-12 12:12:00', b'0'),
-       (2, '2020-12-12 12:13:00', b'1'),
-       (3, '2020-12-12 12:14:00', b'0');
+-- CREATE DATABASE `algobattle` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+create table if not exists algorithm
+(
+    id                  bigint auto_increment
+    primary key,
+    complexity          int          null,
+    cpp_initial_code    varchar(255) null,
+    description         text         null,
+    func_name           varchar(255) null,
+    java_initial_code   varchar(255) null,
+    memory_limit        int          null,
+    python_initial_code varchar(255) null,
+    short_description   text         null,
+    time_limit          int          null,
+    time_to_solve       int          null,
+    wording             varchar(255) null
+    );
+
+create table if not exists algorithm_case
+(
+    id              bigint auto_increment
+    primary key,
+    algo_id         bigint       null,
+    expected_output text         null,
+    name            varchar(255) null,
+    output_type     varchar(255) null
+    );
+
+create table if not exists case_input
+(
+    id      bigint auto_increment
+    primary key,
+    case_id bigint null,
+    value   text   null
+);
+
+create table if not exists game
+(
+    id         bigint auto_increment
+    primary key,
+    created_at datetime             null,
+    is_over    tinyint(1) default 0 not null
+    );
+
+create table if not exists player
+(
+    game_id                 bigint not null,
+    user_id                 bigint not null,
+    remaining_health_points int    null,
+    won                     bit    null,
+    primary key (game_id, user_id)
+    );
+
+create table if not exists resolution
+(
+    algo_id         bigint   not null,
+    user_id         bigint   not null,
+    game_id         bigint   null,
+    linter_errors   int      null,
+    resolution_time bigint   null,
+    solved          bit      null,
+    started_time    datetime null,
+    primary key (algo_id, user_id)
+    );
+
+create table if not exists user
+(
+    id       bigint auto_increment
+    primary key,
+    email    varchar(255) null,
+    name     varchar(255) null,
+    password varchar(255) null,
+    level    int          null
+    );
+
+INSERT INTO `game` (`id`, `created_at`, `is_over`)
+VALUES (1, '2020-12-12 12:12:00', false),
+       (2, '2020-12-12 12:13:00', true),
+       (3, '2020-12-12 12:14:00', false);
 
 INSERT INTO `algorithm` (`id`, `complexity`, `cpp_initial_code`, `description`, `func_name`, `java_initial_code`,
                          `memory_limit`, `python_initial_code`, `short_description`, `time_limit`, `time_to_solve`,
@@ -109,8 +184,8 @@ VALUES (1, 1, '[5, 2, 2]'),
 
 
 INSERT INTO `player` (`game_id`, `user_id`, `remaining_health_points`, `won`)
-VALUES (1, 1, 100, b'0'),
-       (1, 2, 100, b'0'),
-       (2, 1, -28, b'0'),
-       (2, 2, 50, b'1'),
-       (3, 2, 100, b'0');
+VALUES (1, 1, 100, false),
+       (1, 2, 100, false),
+       (2, 1, -28, false),
+       (2, 2, 50, true),
+       (3, 2, 100, false);

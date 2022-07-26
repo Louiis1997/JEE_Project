@@ -26,6 +26,7 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 public class CodeRunManager implements RunnableCase, VerifiableOutput {
     private final MainClassGenerateManager mainClassGenerateManager;
+    private final CodexAPIService executorApiService;
 
     Logger logger = LogManager.getLogger(CodeRunManager.class);
 
@@ -45,7 +46,7 @@ public class CodeRunManager implements RunnableCase, VerifiableOutput {
 
             String currentCode = sourceCodeExecutables.get(i);
             logger.info("Executing code..");
-            CodexExecuteResponse result = new CodexAPIService().post(currentCode, language.toString());
+            CodexExecuteResponse result = executorApiService.post(currentCode, language.toString());
             logger.info("End of execution");
             logger.info("Result from codex :\n" + result);
 

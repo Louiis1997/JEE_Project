@@ -11,10 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 class CreateCaseInputTest {
     private CaseInput caseInput1;
     private Algorithm algorithm1;
@@ -77,7 +79,7 @@ class CreateCaseInputTest {
                 .setAlgorithmCase(algorithmCase1);
 
         Mockito.when(caseInputDAO.create(caseInput)).thenReturn(caseInput1);
-        CaseInput caseInputResponse = createCaseInput.execute(algorithmCaseId,goodRequest);
+        CaseInput caseInputResponse = createCaseInput.execute(algorithmCaseId, goodRequest);
         Assertions.assertEquals(caseInput1, caseInputResponse);
     }
 
@@ -85,13 +87,13 @@ class CreateCaseInputTest {
     void when_input_case_request_is_not_valid_then_throw_null_pointer_exception() {
         Long algorithmCaseId = 1L;
         Mockito.when(algorithmCaseDAO.findById(algorithmCaseId)).thenReturn(algorithmCase1);
-        Assertions.assertThrows( NullPointerException.class, () -> createCaseInput.execute(algorithmCaseId, badRequest));
+        Assertions.assertThrows(NullPointerException.class, () -> createCaseInput.execute(algorithmCaseId, badRequest));
     }
 
     @Test
     void when_input_case_request_is_null_then_throw_null_pointer_exception() {
         Long algorithmCaseId = 1L;
         Mockito.when(algorithmCaseDAO.findById(algorithmCaseId)).thenReturn(algorithmCase1);
-        Assertions.assertThrows( NullPointerException.class, () -> createCaseInput.execute(algorithmCaseId,null));
+        Assertions.assertThrows(NullPointerException.class, () -> createCaseInput.execute(algorithmCaseId, null));
     }
 }

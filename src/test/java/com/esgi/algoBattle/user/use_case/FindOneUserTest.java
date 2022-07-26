@@ -7,13 +7,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 class FindOneUserTest {
 
     @Autowired
@@ -23,7 +25,7 @@ class FindOneUserTest {
     private UserDAO userDAO;
 
     @Test
-    public void should_found_an_user(){
+    public void should_find_a_user() {
         User user = new User()
                 .setId(1L)
                 .setName("Louis")
@@ -39,7 +41,7 @@ class FindOneUserTest {
     }
 
     @Test
-    void should_throw_NotFoundException() {
+    void should_throw_a_not_found_exception() {
         Long userId = 0L;
         Mockito.when(userDAO.findById(userId)).thenThrow(new NotFoundException(
                 String.format("User with id '%d' does not exist", 0L)));

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -24,8 +25,10 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
+@AutoConfigureTestDatabase
 public class CompileCodeTest {
     private final Algorithm algorithm = new Algorithm();
     private final AlgorithmCase firstAlgorithmCase = new AlgorithmCase();
@@ -89,7 +92,7 @@ public class CompileCodeTest {
         var compilerServiceResponse = new CodexExecuteResponse();
         compilerServiceResponse.success = (true);
         compilerServiceResponse.timestamp = new Date().toString();
-        compilerServiceResponse.output = ("9");
+        compilerServiceResponse.output = ("9\n");
 
         var sourceCode = "def sum(array):\n  sum = 0;\n  for x in array:\n    sum = sum + x;\n  return sum;";
         var language = Language.Python;
@@ -97,7 +100,7 @@ public class CompileCodeTest {
         Mockito.when(findAlgorithmById.execute(1L)).thenReturn(algorithm);
         Mockito.when(findAllAlgorithmCasesByAlgo.execute(1L)).thenReturn(algorithm.getCases());
         Mockito.when(findAllCaseInputsByCase.execute(1L)).thenReturn(firstAlgorithmCase.getInput());
-        Mockito.when(codexAPIService.post(sourceCode, language.toString())).thenReturn(compilerServiceResponse);
+        Mockito.when(codexAPIService.post(any(String.class), any(String.class))).thenReturn(compilerServiceResponse);
 
         var output = compileCode.execute(algorithm.getId(), sourceCode, language);
 
